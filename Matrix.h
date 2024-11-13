@@ -21,7 +21,26 @@ class Matrix:public Vector<Vector<T>>{
     Matrix operator-(const Matrix& mt){
         return Vector<Vector<T>>::operator-(mt);
     }
-    Matrix operator*(const Matrix& mt);
+    Matrix operator*(const Matrix& mt){
+        Matrix res=Matrix(_size);
+        for (size_t i=0;i<_size;i++){//строчки
+            for (size_t j=i;j<_size;j++){//столбцы
+                for (size_t z=0;z<j+1;z++){
+                    res[i][j]+=_array[i][z]+mt[z][j-_start_index];
+
+                }
+                
+            }
+        }
+        
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Matrix& matr){
+        for(size_t i=0; i<matr._size;i++){
+            os<<matr._array[i]<<std::endl;
+        }
+        return os;
+    }
     
 
 
