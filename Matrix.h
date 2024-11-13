@@ -6,9 +6,10 @@ template <class T>
 
 
 class Matrix:public Vector<Vector<T>>{
-    Matrix(size_t n):Vector<Vector<T>>(n){
+public:
+   Matrix(size_t n):Vector<Vector<T>>(n){
         for(size_t i=0;i<n;i++){
-            _array[i]=Vector(n-i, i);
+            this->_array[i]=Vector<T>(n, i);
         }
     }
     Matrix(const Matrix& mt):Vector<Vector<T>>(mt){
@@ -22,17 +23,17 @@ class Matrix:public Vector<Vector<T>>{
         return Vector<Vector<T>>::operator-(mt);
     }
     Matrix operator*(const Matrix& mt){
-        Matrix res=Matrix(_size);
-        for (size_t i=0;i<_size;i++){//строчки
-            for (size_t j=i;j<_size;j++){//столбцы
+        Matrix res=Matrix(this->_size);
+        for (size_t i=0;i<this->_size;i++){//строчки
+            for (size_t j=i;j<this->_size;j++){//столбцы
                 for (size_t z=0;z<j+1;z++){
-                    res[i][j]+=_array[i][z]+mt[z][j-_start_index];
+                    res[i][j]+=this->_array[i][z]*mt[z][j-this->_start_index];
 
                 }
                 
             }
         }
-        
+        return res;
     }
 
     friend std::ostream& operator<<(std::ostream& os, const Matrix& matr){

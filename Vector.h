@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 template <class T>
 
@@ -7,7 +8,8 @@ protected:
     size_t _size;
     size_t _start_index;//перывй индекс с которого начинается вектор
 public:
-    Vector(size_t size){
+    
+    Vector(size_t size=10){
         _size=size;
         _start_index=0;
         _array=new T[_size];
@@ -22,6 +24,7 @@ public:
     }//выделение памяти, проверка на старт индекс не больше размера, размер не нулевой
     Vector(const Vector& tmp){
         _size=tmp._size;
+        _array=new T[_size];
         _start_index=tmp._start_index;
         for(size_t i=0;i<_size;i++){
             _array[i]=tmp._array[i];
@@ -74,7 +77,7 @@ public:
     Vector operator+(const T& tmp){
     }
     Vector operator-(const T& tmp){
-
+        
     }
     Vector operator*(const T& tmp){
         Vector x=Vector(*this);
