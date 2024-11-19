@@ -15,11 +15,14 @@ public:
         _array=new T[_size];
     }
     Vector(size_t size, size_t start){
-        if(start>size||size<=0)
+        if(size<=0)
         throw "error";
         _size=size;
         _start_index=start;
         _array=new T[_size];
+        for(size_t i=0; i<size;i++){
+            _array[i]=0;
+        }
     
     }//выделение памяти, проверка на старт индекс не больше размера, размер не нулевой
     Vector(const Vector& tmp){
@@ -56,11 +59,11 @@ public:
         throw"out of range";
         return _array[pos];
     }
-    //не должно быть выхода за границу
+    
     T& operator[](size_t position)const{
         return _array[position];
     }
-    Vector& operator=(const Vector& tmp){//тут тоже че-то с T потом придумать
+    Vector& operator=(const Vector& tmp){
         if(_size!=tmp._size){
         delete [] _array;
         _array=new T [tmp._size];
@@ -72,8 +75,7 @@ public:
         }
         return *this;
 
-    }//нужно понять когда вызывается перемещение а когда это
-
+    }
     Vector operator+(const T& tmp){
     }
     Vector operator-(const T& tmp){
@@ -116,12 +118,12 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Vector& vect){
         os<<"(";
-        for(int i=0; i<vect._size;i++){
+        for(int i=0; i<vect._size+vect.GetStartIndex();i++){
             if(vect._start_index>i)
             os<<0<<", ";
             else{
-            os<<vect._array[i];
-            if(i+1!=vect._size)
+            os<<vect._array[i-vect._start_index];
+            if(i+1!=vect._size+vect.GetStartIndex())
                 os<<", ";
             }
         }
@@ -131,19 +133,13 @@ public:
 
      friend std::istream& operator>>(std::istream& istr, Vector& vec){
         T current;
-        vec._start_index=0;
-        //std::cout<<"enter size: ";
-        //istr>>vec._size;
-        for (size_t i=0;i< vec._size;i++){
-            std::cout<<"elem n"<<i<<": ";
+        for (size_t i=0; i<vec._size; i++){
+            std::cout<<"elem n"<<i+vec._start_index<<": ";
             istr>>current;
-            if (current==0)
-            vec._start_index++;
-            else
             vec._array[i]=current;
 
         }
         return istr;
     }
-    //ввод и вывод еще написать...
+    
 };
