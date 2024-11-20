@@ -3,16 +3,21 @@
 #include "Matrix.h"
 
 int main(){
-  Matrix<int> m=Matrix<int>(4);
-  Matrix<int> m2=Matrix<int>(4);
-  std::cin>>m;
-  std::cin>>m2;
-  //Matrix<int> m2=Matrix<int>(m);
-  Matrix<int> res=m*m2;
-  std::cout<<m<<std::endl;
-  std::cout<<m2<<std::endl;
-  std::cout<<res<<std::endl;
-    
+  // Matrix<int> m=Matrix<int>(3);
+  // Matrix<int> m2=Matrix<int>(3);
+  // std::cin>>m;
+  // std::cin>>m2;
+  // Matrix<int> m2=Matrix<int>(m);
+  // Matrix<int> res=m*m2;
+  // std::cout<<m<<std::endl;
+  // std::cout<<m2<<std::endl;
+  // std::cout<<res<<std::endl;
+    Vector<int> v=Vector<int>();
+    Vector<int> v2=v.test();
+
+
+  
+  
     
 
 

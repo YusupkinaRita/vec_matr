@@ -24,7 +24,7 @@ public:
             _array[i]=0;
         }
     
-    }//выделение памяти, проверка на старт индекс не больше размера, размер не нулевой
+    }
     Vector(const Vector& tmp){
         _size=tmp._size;
         _array=new T[_size];
@@ -32,7 +32,8 @@ public:
         for(size_t i=0;i<_size;i++){
             _array[i]=tmp._array[i];
         }
-    }//тут чета надо с типами Т, но я пока не знаю что
+        std::cout<<"copy constructor"<<std::endl;
+    }
     Vector(Vector&& moved){
         _size=moved._size;
         _start_index=moved._start_index;
@@ -40,8 +41,13 @@ public:
         moved._array=nullptr;
         moved._size=0;
         moved._start_index=0;
+        std::cout<<"конструктор перемещения"<<std::endl;
 
-    }//конструктор перемещения надо сделать
+    }
+    Vector test(){
+        Vector<int> a=Vector(3,0);
+        return a;
+    }
     ~Vector(){
         delete[] _array;
         _array=nullptr;
@@ -73,6 +79,21 @@ public:
         for(size_t i=0;i<_size;i++){
             _array[i]=tmp._array[i];
         }
+        return *this;
+
+    }
+    Vector& operator=(Vector&& tmp){
+        if(_size!=tmp._size){
+        delete [] _array;
+        _array=new T [tmp._size];
+        }
+        _size=tmp._size;
+        _start_index=tmp._start_index;
+        for(size_t i=0;i<_size;i++){
+            _array[i]=tmp._array[i];
+        }
+        delete[] tmp._array;
+        tmp._array=nullptr;
         return *this;
 
     }
@@ -115,6 +136,7 @@ public:
         }
         return res;
     }
+
 
     friend std::ostream& operator<<(std::ostream& os, const Vector& vect){
         os<<"(";
