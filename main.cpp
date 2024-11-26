@@ -13,7 +13,7 @@ int main(){
   // std::cout<<m2<<std::endl;
   // std::cout<<res<<std::endl;
     Vector<int> v=Vector<int>();
-    Vector<int> v2=v.test();
+    Vector<int> v2=std::move(v);
 
 
   

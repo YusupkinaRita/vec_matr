@@ -41,7 +41,7 @@ public:
         moved._array=nullptr;
         moved._size=0;
         moved._start_index=0;
-        std::cout<<"конструктор перемещения"<<std::endl;
+        std::cout<<"move constructor"<<std::endl;
 
     }
     Vector test(){
